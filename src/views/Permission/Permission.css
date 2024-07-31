@@ -1,0 +1,49 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+#permissions {
+    margin-top: 20px;
+}
+
+#permissions h2 {
+    margin-bottom: 10px;
+}
+
+#allPermissions {
+    margin-top: 20px;
+}
+
+#allPermissions .list-group-item {
+    display: flex;
+    justify-content: space-between;
+}

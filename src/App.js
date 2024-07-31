@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import React from 'react';
+import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
+import Home from './views/Home/Home';
+import SignUp from './views/SignUp/SignUp';
+import TopBar from './components/TopBar';
+import Contact from './views/Contact/Contact'
+import UserPage from './views/UserPage/UserPage';
+import Login from './views/Login/Login';
+import UserUpdateProfile from './components/UserUpdateProfile';
+import Permission from './views/Permission/Permission';
+
+
+const App = () => {
+
+  const { isLoggedIn } = useSelector(store => {
+    return {
+      isLoggedIn : store.isLoggedIn
+    }
+  });
+
+  return(
+    <div>
+
+      <BrowserRouter>
+
+        <TopBar />
+
+        <Routes>
+          <Route exact path="/" element={<Home />}/>
+
+          {!isLoggedIn && (
+            <Route path="/login" element={<Login />}/>
+          )}
+
+          <Route path="/signup" element={<SignUp />} />
+
+          <Route path="/permission" element={<Permission />} />
+
+          <Route path="/contact" element={<Contact />} />
+          
+
+          <Route path="/profile/:email" element={<UserPage />} />
+
+          <Route path="/profile/update/:email" element={<UserUpdateProfile />} />
+
+          <Route path="/" element={<Navigate to="/home" />} />
+        </Routes>
+
+      </BrowserRouter>
+
     </div>
   );
+
 }
 
 export default App;
