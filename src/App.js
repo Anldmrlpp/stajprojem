@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import Contact from './views/Contact/Contact'
 import UserPage from './views/UserPage/UserPage';
 import Login from './views/Login/Login';
 import UserUpdateProfile from './components/UserUpdateProfile';
+import Permission from './views/Permission/Permission';
 
 const App = () => {
 
@@ -39,6 +41,8 @@ const App = () => {
           <Route path="/profile/:email" element={<UserPage />} />
 
           <Route path="/profile/update/:email" element={<UserUpdateProfile />} />
+
+          <Route path="/permission" element={<Permission />} />
 
           <Route path="/" element={<Navigate to="/home" />} />
         </Routes>

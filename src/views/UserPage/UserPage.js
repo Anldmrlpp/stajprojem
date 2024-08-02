@@ -167,14 +167,26 @@ const UserPage = () => {
                         </MDBCol>
                         </MDBRow>
                         <hr />
-                        <MDBRow>
-                        <MDBCol sm="3">
-                            <MDBCardText>Rol</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                            <MDBCardText className="text-muted">{user.role || user.department || "Belirtilmedi"}</MDBCardText>
-                        </MDBCol>
-                        </MDBRow>
+                        {statuses === "ADMIN" && 
+                            <MDBRow>
+                            <MDBCol sm="3">
+                                <MDBCardText>Rol</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="9">
+                                <MDBCardText className="text-muted">{user.role || "Belirtilmedi"}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                        }
+                        {statuses === "EMPLOYEE" && 
+                            <MDBRow>
+                            <MDBCol sm="3">
+                                <MDBCardText>Departman</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="9">
+                                <MDBCardText className="text-muted">{user.department || "Belirtilmedi"}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                        }
                         <hr />
                         <MDBRow>
                         <MDBCol sm="3">
@@ -187,6 +199,18 @@ const UserPage = () => {
                     </MDBCardBody>
                     </MDBCard>
 
+                    {statuses === "EMPLOYEE" &&
+                        <MDBRow>
+                        <MDBCol md="12">
+                            <MDBCard className="mb-4 mb-md-0">
+                            <MDBCardBody>
+                                <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">{user.firstName} {user.lastName}:</span> Kalan İzinli Gün Sayınız</MDBCardText>
+                                <h3>{user.leaveBalance} Gün İzniniz Bulunmaktadır.</h3>
+                            </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                        </MDBRow>
+                    }
                     <MDBRow>
                     <MDBCol md="12">
                         <MDBCard className="mb-4 mb-md-0">

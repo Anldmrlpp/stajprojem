@@ -46,3 +46,7 @@ export const updateUser = (id, form) => {
 export const updateAdmin = (id, form, adminKey) => {
     return axios.put(`/api/v1/admins/update/${id}`, form, {headers: {key: adminKey}});
 }
+
+export const createContact = (body) => {
+    return axios.post("/api/v1/contacts/create", body);
+}
