@@ -5,7 +5,6 @@ import { createContact } from '../../api/apiCalls';
 import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faFacebookSquare, faInstagram, faWhatsapp, faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
 
 const Contact = () => {
 
@@ -127,14 +126,8 @@ const Contact = () => {
                                     <label className="alert alert-info ms-1 mt-4">Mesajınızı iletmek için sisteme Giriş Yapmalısınız!</label>
                                 }
                                 {error != null && <label className="alert alert-danger ms-5">{error}</label> }
-                                <div className="text-center mt-0">
-                                    <ul className="list-inline mb-0">
-                                        <li className="list-inline-item me-3 "><FontAwesomeIcon icon={faFacebookSquare} size="3x" /></li>
-                                        <li className="list-inline-item me-3"><FontAwesomeIcon icon={faInstagram} size="3x" /></li>
-                                        <li className="list-inline-item me-3"><FontAwesomeIcon icon={faWhatsapp} size="3x" /></li>
-                                        <li className="list-inline-item"><FontAwesomeIcon icon={faTwitterSquare} size="3x" /></li>
-                                    </ul>
-                                </div>
+                                
+                        
                             </form>
                         </div>
                     </div>

@@ -22,6 +22,10 @@ export const getUser = (email) => {
     return axios.get(`/api/v1/employee/get?email=${email}`);
 }
 
+export const getUsers = (page = 0, size = 3) => {
+    return axios.get(`/api/v1/employee/allEmployees?page=${page}&size=${size}&sort=createdDate,DESC`);
+}
+
 export const getAdmin = (email) => {
     return axios.get(`/api/v1/admins/get/admin/${email}`);
 }

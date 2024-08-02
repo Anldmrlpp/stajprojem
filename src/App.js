@@ -2,7 +2,6 @@
 import React from 'react';
 import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-
 import Home from './views/Home/Home';
 import SignUp from './views/SignUp/SignUp';
 import TopBar from './components/TopBar';
