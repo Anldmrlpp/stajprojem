@@ -8,6 +8,7 @@ import profile from '../../images/profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarPlus, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 import { logoutSuccess } from '../../redux/authActions';
+import PermissionFeed from '../../components/PermissionFeed';
 
 const UserPage = () => {
 
@@ -222,6 +223,9 @@ const UserPage = () => {
                     </MDBCol>
                     </MDBRow>
                 </MDBCol>
+            </MDBRow>
+            <MDBRow className="mb-5">
+                <PermissionFeed cardLocation="ProfilePage" userId={user.id} />
             </MDBRow>
         </MDBContainer>
         </section>
