@@ -8,8 +8,8 @@ import profile from '../images/profile.png';
 import { useApiProgress } from '../shared/ApiProgress';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { updateUserSuccess } from '../redux/authActions';
 
-import { faSave } from '@fortawesome/free-solid-svg-icons';
 
 const UserUpdateProfile = () => {
 
