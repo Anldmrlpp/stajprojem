@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBProgress, MDBProgressBar, MDBIcon, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBIcon, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
 import { getAdmin, getUser } from '../../api/apiCalls';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../components/Spinner';
 import profile from '../../images/profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarPlus, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarPlus, faCalendarCheck, faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { logoutSuccess } from '../../redux/authActions';
 import PermissionFeed from '../../components/PermissionFeed';
 
@@ -112,19 +112,30 @@ const UserPage = () => {
                     <MDBCardBody className="p-0">
                         <MDBListGroup flush className="rounded-3">
                         <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                            <MDBIcon fas icon="fa-lg">  
-                                <FontAwesomeIcon icon={faCalendarPlus} className="fa-lg text-primary me-2" />
-                                Oluşturulma Tarihi:
-                            </MDBIcon>
-                            <MDBCardText>{formatDate(user.createdDate)}</MDBCardText>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                            <MDBIcon fab icon="fa-lg">
-                                <FontAwesomeIcon icon={faCalendarCheck} className="fa-lg text-success me-2" />
-                                Güncellenme Tarihi:
-                            </MDBIcon>
-                            <MDBCardText>{formatDate(user.updatedDate)}</MDBCardText>
-                        </MDBListGroupItem>
+                                <MDBIcon fas icon="fa-lg">  
+                                    <FontAwesomeIcon icon={faCalendarPlus} className="fa-lg text-primary me-2" />
+                                    Oluşturulma Tarihi:
+                                </MDBIcon>
+                                <MDBCardText>{formatDate(user.createdDate)}</MDBCardText>
+                            </MDBListGroupItem>
+                            <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+                                <MDBIcon fab icon="fa-lg">
+                                    <FontAwesomeIcon icon={faCalendarCheck} className="fa-lg text-success me-2" />
+                                    Güncellenme Tarihi:
+                                </MDBIcon>
+                                <MDBCardText>{formatDate(user.updatedDate)}</MDBCardText>
+                            </MDBListGroupItem>
+                            {(statuses === "ADMIN" && storeEmail==email) &&
+                                <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+                                    <MDBIcon fab icon="fa-lg">
+                                        <FontAwesomeIcon icon={faClipboard} className="fa-lg text-success me-2" />
+                                        İzin İşlemleri:
+                                    </MDBIcon>
+                                    <MDBCardText>
+                                        <Link to={"/create/permission"} className="btn btn-primary">Yeni Bir İzin Oluştur</Link>
+                                    </MDBCardText>
+                                </MDBListGroupItem>
+                            }
                         </MDBListGroup>
                     </MDBCardBody>
                     </MDBCard>
@@ -178,7 +189,7 @@ const UserPage = () => {
                             </MDBCol>
                             </MDBRow>
                         }
-                        {statuses === "EMPLOYEE" && 
+                        {statuses !== "ADMIN" && 
                             <MDBRow>
                             <MDBCol sm="3">
                                 <MDBCardText>Departman</MDBCardText>
@@ -200,7 +211,7 @@ const UserPage = () => {
                     </MDBCardBody>
                     </MDBCard>
 
-                    {statuses === "EMPLOYEE" &&
+                    {((statuses === "ADMIN" && storeEmail!=email) || statuses !== "ADMIN") &&
                         <MDBRow>
                         <MDBCol md="12">
                             <MDBCard className="mb-4 mb-md-0">
@@ -224,9 +235,11 @@ const UserPage = () => {
                     </MDBRow>
                 </MDBCol>
             </MDBRow>
-            <MDBRow className="mb-5">
-                <PermissionFeed cardLocation="ProfilePage" userId={user.id} />
-            </MDBRow>
+            {((statuses === "ADMIN" && storeEmail!==email) || statuses !== "ADMIN") &&
+                <MDBRow className="mb-5">
+                    <PermissionFeed cardLocation="ProfilePage" userId={user.id} />
+                </MDBRow>
+            }
         </MDBContainer>
         </section>
     );

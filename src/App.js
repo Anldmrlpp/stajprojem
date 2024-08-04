@@ -10,6 +10,7 @@ import UserPage from './views/UserPage/UserPage';
 import Login from './views/Login/Login';
 import UserUpdateProfile from './components/UserUpdateProfile';
 import Permission from './views/Permission/Permission';
+import PermissionCreate from './components/PermissionCreate';
 
 const App = () => {
 
@@ -42,6 +43,8 @@ const App = () => {
           <Route path="/profile/update/:email" element={<UserUpdateProfile />} />
 
           <Route path="/permission" element={<Permission />} />
+
+          <Route path="/create/permission" element={<PermissionCreate />} />
 
           <Route path="/" element={<Navigate to="/home" />} />
         </Routes>
