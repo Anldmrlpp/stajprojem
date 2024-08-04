@@ -45,7 +45,7 @@ const App = () => {
 
           <Route path="/permission" element={<Permission />} />
 
-          <Route path="/create/permission" element={<PermissionCreate />} />
+          <Route path="/permission/create" element={<PermissionCreate />} />
 
           <Route path="/permission/update/:id" element={<PermissionUpdate />} />
 

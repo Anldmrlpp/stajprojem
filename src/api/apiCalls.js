@@ -76,3 +76,6 @@ export const getAllPermissionForEmployee = (employeeId, pageNumber, pageSize, pa
 export const updatePermission = (id, body) => {
     return axios.put(`/api/v1/permissions/update/${id}`, body);
 }
+export const deletePermission = (id) => {
+    return axios.delete(`/api/v1/permissions/delete/${id}`);
+}

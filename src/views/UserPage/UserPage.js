@@ -132,7 +132,7 @@ const UserPage = () => {
                                         İzin İşlemleri:
                                     </MDBIcon>
                                     <MDBCardText>
-                                        <Link to={"/create/permission"} className="btn btn-primary">Yeni Bir İzin Oluştur</Link>
+                                    <Link to={"/permission/create"} className="btn btn-primary">Yeni Bir İzin Oluştur</Link>
                                     </MDBCardText>
                                 </MDBListGroupItem>
                             }

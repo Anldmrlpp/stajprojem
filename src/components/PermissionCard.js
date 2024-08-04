@@ -1,7 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { deletePermission } from "../api/apiCalls";
 
 const PermissionCard = ({ permission }) => {
+
+    const { statuses } = useSelector((store) => ({
+        statuses: store.statuses
+    }));
+
+    const onClickDelete = async () => {
+        try {
+            await deletePermission(permission.id);
+            window.location.reload();
+        } catch(error) {
+
+        }
+    }
 
     let cardType = (
         <div id="permission-card">
