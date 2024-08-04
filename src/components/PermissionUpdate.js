@@ -1,22 +1,40 @@
-import React, { useState } from "react";
-import PermissionPhoto from '../images/permissionPhoto.jpg';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import PermissionPhoto from '../images/permissionPhoto.jpg'
 import Input from "./Input";
-import { useApiProgress } from '../shared/ApiProgress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
-import { createPermission } from "../api/apiCalls";
+import { useApiProgress } from "../shared/ApiProgress";
 import { ToastContainer, toast } from 'react-toastify';
+import { getPermission, updatePermission } from "../api/apiCalls";
 
-const PermissionCreate = () => {
+const PermissionUpdate = () => {
 
     const [employeeId, setEmployeeId] = useState();
     const [description, setDescription] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-
     const [error, setError] = useState(null);
 
-    const pendingApiCall = useApiProgress('post','/api/v1/permissions');
+    const pendingApiCall = useApiProgress('put','/api/v1/permissions');
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        loadPermission();
+    }, []);
+
+    const loadPermission = async () => {
+        try {
+            const response = await getPermission(id);
+            setEmployeeId(response.data.employeeId);
+            setDescription(response.data.description);
+            setStartDate(response.data.startDate);
+            setEndDate(response.data.endDate);
+        } catch(error) {
+
+        }
+    }
 
     const onChange = (event) => {
         const name = event.target.name;
@@ -46,17 +64,11 @@ const PermissionCreate = () => {
             description,
             startDate,
             endDate
-        };
+        }
 
         try {
-            await createPermission(body);
-            toast.success("İzin Kaydı Başarıyla Oluşturuldu!");
-
-            setEmployeeId("");
-            setDescription("");
-            setStartDate("");
-            setEndDate("");
-            setError(null);
+            await updatePermission(id, body);
+            navigate("/permission");
         } catch(error) {
             setError("Error "+ error.response.data.status + ": " + error.response.data.detail);
         }
@@ -73,6 +85,7 @@ const PermissionCreate = () => {
                     </img>
                 </div>
                 <div className="card-body ps-5 pe-5">
+
                     <Input name="employeeId" label="İzin Alan Çalışan Id'si" type="text" onChangeVeriables={onChange} placeholder="3fa85f64-5717-4562-b3fc-2c963f66afa6" value={employeeId} />
 
                     <Input name="description" label="İzin Nedeni" type="text" onChangeVeriables={onChange} placeholder="Hasta, Tatil, Kişisel Nedenler..." value={description} />
@@ -88,7 +101,7 @@ const PermissionCreate = () => {
                                 disabled = {pendingApiCall}>
                             {pendingApiCall ? <span className="spinner-border spinner-border-sm"></span> : ''}
                             <FontAwesomeIcon icon={faSave} className="pe-2 pt-1" />
-                            Kaydet
+                            Güncelle
                         </button>
 
                     </div>
@@ -102,4 +115,4 @@ const PermissionCreate = () => {
     );
 }
 
-export default PermissionCreate;
+export default PermissionUpdate;

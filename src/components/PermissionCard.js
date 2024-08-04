@@ -15,6 +15,12 @@ const PermissionCard = ({ permission }) => {
                         <p className="card-text mb-3 text-muted fst-italic"><span className="fw-bold">İzin Alınan Gün Sayısı:</span> {permission.numberOfDays}</p>
                         <p className="card-text"><span className="fw-bold">Tarih:</span> {permission.startDate} - {permission.endDate}</p>
                         <button className="btn btn-success">Görüntüle</button>
+                        {statuses === "ADMIN" &&
+                            <div className="d-inline">
+                                <Link to={`/permission/update/${permission.id}`} className="btn btn-warning ms-2">Güncelle</Link>
+                                <Link className="btn btn-danger ms-2" onClick={onClickDelete}>Sil</Link>
+                            </div>
+                        }
                     </div>
                 </Link>
             </div>
