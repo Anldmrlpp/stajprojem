@@ -65,7 +65,7 @@ const UserList = () => {
             <div className="list-group list-group-flush">
                 {
                     users.map(user => (
-                        <UserListItem  key={user.username} user={user}/>
+                        <UserListItem  key={user.email} user={user}/>
                     ))
                 }
             </div>

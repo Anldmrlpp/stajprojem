@@ -152,3 +152,95 @@
     background-color: #fff;
     color: black;
 }
+
+#permission-card .my-card {
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 10px 10px 40px rgba(52, 58, 64, 0.1);
+
+    position: relative;
+    bottom: 0px;
+    transition: all .6s;
+}
+
+#permission-card .my-card:hover {
+    bottom: 10px;
+}
+
+#permission-card .card-padding {
+    padding: 10px;
+}
+
+#permission-card .card-for-job .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#permission-card .card-for-job .image-container img {
+    height: 300px;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+#permission-card .card-for-job .image-container-for-company img {
+    width: 12rem;
+    height: 9rem;
+    object-fit: cover;
+}
+
+#message-card .my-card {
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 10px 10px 40px rgba(52, 58, 64, 0.1);
+
+    position: relative;
+    bottom: 0px;
+    transition: all .6s;
+}
+
+#message-card .my-card:hover {
+    bottom: 10px;
+}
+
+#message-card .card-padding {
+    padding: 10px;
+}
+
+#message-card .card-for-job .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-card .card-for-job .image-container img {
+    height: 300px;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+#message-card .card-for-job .image-container-for-company img {
+    width: 12rem;
+    height: 9rem;
+    object-fit: cover;
+}
+
+#message-card .my-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#message-card .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#message-card .card-footer {
+    margin-top: auto;
+}

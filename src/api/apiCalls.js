@@ -19,7 +19,11 @@ export const loginAdmin = (creds) => {
 }
 
 export const getUser = (email) => {
-    return axios.get(`/api/v1/employee/get?email=${email}`);
+    return axios.get(`/api/v1/employee/get/email/${email}`);
+}
+
+export const getUserWithId = (id) => {
+    return axios.get(`/api/v1/employee/get/id/${id}`);
 }
 
 export const getUsers = (page = 0, size = 3) => {
@@ -53,4 +57,11 @@ export const updateAdmin = (id, form, adminKey) => {
 
 export const createContact = (body) => {
     return axios.post("/api/v1/contacts/create", body);
+}
+export const getAllPermission = (pageNumber, pageSize, pageSort) => {
+    return axios.get(`/api/v1/permissions/get/all?page=${pageNumber}&size=${pageSize}&sort=${pageSort}`);
+}
+
+export const getAllPermissionForEmployee = (employeeId, pageNumber, pageSize, pageSort) => {
+    return axios.get(`/api/v1/permissions/get/employee/${employeeId}?page=${pageNumber}&size=${pageSize}&sort=${pageSort}`);
 }
