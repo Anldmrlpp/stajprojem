@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../components/Spinner';
 import profile from '../../images/profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarPlus, faCalendarCheck, faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarPlus, faCalendarCheck, faClipboard, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { logoutSuccess } from '../../redux/authActions';
 import PermissionFeed from '../../components/PermissionFeed';
 
@@ -99,11 +99,15 @@ const UserPage = () => {
                         className="rounded-circle"
                         style={{ width: '150px' }}
                         fluid />
-                        <p className="text-muted mb-1"><i>{user.department || "Belirtilmedi"}</i></p>
+                         <p className="text-muted mb-1"><i>{user.department || user.role || "Belirtilmedi"}</i></p>
                         <h4 className="text-muted mb-4">{user.firstName} {user.lastName}</h4>
                         <div className="d-flex justify-content-center mb-2">
-                        <Link to={`/profile/update/${email}`} className="btn btn-primary">Güncelle</Link>
-                        <button className="ms-1 btn btn-danger" onClick={onClickLogout}>Çıkış Yap</button>
+                        {storeEmail === email &&
+                            <div>
+                                <Link to={`/profile/update/${email}`} className="btn btn-primary">Güncelle</Link>
+                                <button className="ms-1 btn btn-danger" onClick={onClickLogout}>Çıkış Yap</button>
+                            </div>
+                        }
                         </div>
                     </MDBCardBody>
                     </MDBCard>
@@ -128,11 +132,22 @@ const UserPage = () => {
                             {(statuses === "ADMIN" && storeEmail==email) &&
                                 <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                                     <MDBIcon fab icon="fa-lg">
-                                        <FontAwesomeIcon icon={faClipboard} className="fa-lg text-success me-2" />
+                                    <FontAwesomeIcon icon={faClipboard} className="fa-lg text-danger me-2" />
                                         İzin İşlemleri:
                                     </MDBIcon>
                                     <MDBCardText>
-                                    <Link to={"/permission/create"} className="btn btn-primary">Yeni Bir İzin Oluştur</Link>
+                                    <Link to={"/permission/create"} className="btn btn-danger">Yeni Bir İzin Oluştur</Link>
+                                    </MDBCardText>
+                                </MDBListGroupItem>
+                            }
+                            {(statuses === "ADMIN" && storeEmail==email) &&
+                                <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+                                    <MDBIcon fab icon="fa-lg">
+                                        <FontAwesomeIcon icon={faEnvelope} className="fa-lg text-warning me-2" />
+                                        İletişim:
+                                    </MDBIcon>
+                                    <MDBCardText>
+                                        <Link to={"/contact/message"} className="btn btn-warning">Mesajları Görüntüle</Link>
                                     </MDBCardText>
                                 </MDBListGroupItem>
                             }
