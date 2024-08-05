@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF, faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { faLock, faEnvelope, faKey  } from '@fortawesome/free-solid-svg-icons';
 import './Login.css';
+import { useApiProgress } from '../../shared/ApiProgress';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -17,6 +18,9 @@ const Login = () => {
     const [error, setError] = useState(null);
 
     const [signUpMode, setSignUpMode] = useState(false);
+
+    const pendingApiCallUser = useApiProgress('get','/api/v1/employee/login/');
+    const pendingApiCallAdmin = useApiProgress('get','/api/v1/admins/login/');
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -100,7 +104,10 @@ const Login = () => {
                         </i>
                         <input type="password" name="password" placeholder="Şifre" value={password} onChange={onChange} />
                         </div>
-                        <input type="submit" value="Giriş Yap" className="btn solid" onClick={onClickSubmitForUser} />
+                        <button className="btn solid" onClick={onClickSubmitForUser}>
+                            {pendingApiCallUser ? <span className="spinner-border spinner-border-sm"></span> : ''}
+                            Giriş Yap
+                        </button>
                         <p className="social-text">Veya sosyal medya hesaplarınız ile giriş yapın</p>
                         <div className="social-media">
                             <a href="#" className="social-icon">
@@ -138,7 +145,10 @@ const Login = () => {
                             </i>
                             <input type="password" name="adminKey" placeholder="Admin Anahtarı" value={adminKey} onChange={onChange} />
                         </div>
-                        <input type="submit" className="btn-submit" value="Giriş Yap" onClick={onClickSubmitForAdmin} />
+                        <button className="btn-submit" onClick={onClickSubmitForAdmin}>
+                            {pendingApiCallAdmin ? <span className="spinner-border spinner-border-sm"></span> : ''}
+                            Giriş Yap
+                        </button>
                         <p className="social-text">Veya sosyal medya hesaplarınız ile giriş yapın</p>
                         <div className="social-media">
                             <a href="#" className="social-icon">

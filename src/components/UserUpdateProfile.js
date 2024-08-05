@@ -6,10 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../components/Spinner';
 import profile from '../images/profile.png';
 import { useApiProgress } from '../shared/ApiProgress';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { updateUserSuccess } from '../redux/authActions';
-
 
 const UserUpdateProfile = () => {
 
@@ -28,15 +27,15 @@ const UserUpdateProfile = () => {
 
     const [error, setError] = useState(null);
 
-    const { id, email, password, role, statuses } = useSelector((store) => ({
+    const { id, email, password, statuses } = useSelector((store) => ({
         id: store.id,
         email: store.email,
         password: store.password,
-        role: store.role,
         statuses: store.statuses
     }));
 
-    const pendingApiCall = useApiProgress('post','/api/v1/JobPosting');
+    const pendingApiCallUser = useApiProgress('put','/api/v1/employee/update/');
+    const pendingApiCallAdmin = useApiProgress('put','/api/v1/admins/update/');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -219,8 +218,8 @@ const UserUpdateProfile = () => {
                                     
                         <button className="btn btn-primary d-inline-flex"
                                 onClick={onClickSave}
-                                disabled = {pendingApiCall}>
-                            {pendingApiCall ? <span className="spinner-border spinner-border-sm"></span> : ''}
+                                disabled = {pendingApiCallUser || pendingApiCallAdmin}>
+                            {pendingApiCallUser || pendingApiCallAdmin ? <span className="spinner-border spinner-border-sm"></span> : ''}
                             <FontAwesomeIcon icon={faSave} className="pe-2 pt-1" />
                             Kaydet
                         </button>

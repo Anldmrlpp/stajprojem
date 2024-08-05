@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUpAdminHandler, signUpUserHandler } from '../../redux/authActions';
+import { useApiProgress } from '../../shared/ApiProgress';
 import image1 from '../../images/SignUpAndLoginImage1.svg';
 import image2 from '../../images/SignUpAndLoginImage2.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +21,9 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const [signUpMode, setSignUpMode] = useState(false);
+
+  const pendingApiCallUser = useApiProgress('post','/api/v1/employee/signup');
+  const pendingApiCallAdmin = useApiProgress('post','/api/v1/admins/signup');
 
   const dispatch = useDispatch();
 
@@ -137,7 +141,10 @@ const Login = () => {
                 </i>
                 <input type="password" name="password" placeholder="Şifre" value={password} onChange={onChange} />
               </div>
-              <input href="#" type="submit" value="Kayıt Ol" className="btn-submit solid" onClick={onClickSubmitForUser} />
+              <button className="btn-submit solid" onClick={onClickSubmitForUser}>
+                {pendingApiCallUser ? <span className="spinner-border spinner-border-sm"></span> : ''}
+                Kayıt Ol
+              </button>
               <p className="social-text">Veya sosyal medya hesaplarınız ile kaydolun</p>
               <div className="social-media">
                 <a href="#" className="social-icon">
@@ -187,7 +194,10 @@ const Login = () => {
                 </i>
                 <input type="password" name="adminKey" placeholder="Admin Anahtarı" value={adminKey} onChange={onChange} />
               </div>
-              <input type="submit" className="btn-submit" value="Kayıt Ol" onClick={onClickSubmitForAdmin} />
+              <button className="btn-submit" onClick={onClickSubmitForAdmin}>
+                {pendingApiCallAdmin ? <span className="spinner-border spinner-border-sm"></span> : ''}
+                Kayıt Ol
+              </button>
               {error == null ? <label className="alert alert-info mt-2">Admin Olarak Kayıt Olmak İçin Anahtar Bilgisi Gerekmektedir!</label> :
               <label className="alert alert-danger mt-2">{error}</label> }
             </form>
