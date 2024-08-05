@@ -99,7 +99,7 @@ const UserPage = () => {
                         className="rounded-circle"
                         style={{ width: '150px' }}
                         fluid />
-                         <p className="text-muted mb-1"><i>{user.department || user.role || "Belirtilmedi"}</i></p>
+                        <p className="text-muted mb-1"><i>{user.department || user.role || "Belirtilmedi"}</i></p>
                         <h4 className="text-muted mb-4">{user.firstName} {user.lastName}</h4>
                         <div className="d-flex justify-content-center mb-2">
                         {storeEmail === email &&
@@ -115,7 +115,7 @@ const UserPage = () => {
                     <MDBCard className="mb-4 mb-lg-0">
                     <MDBCardBody className="p-0">
                         <MDBListGroup flush className="rounded-3">
-                        <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+                            <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                                 <MDBIcon fas icon="fa-lg">  
                                     <FontAwesomeIcon icon={faCalendarPlus} className="fa-lg text-primary me-2" />
                                     Oluşturulma Tarihi:
@@ -132,11 +132,11 @@ const UserPage = () => {
                             {(statuses === "ADMIN" && storeEmail==email) &&
                                 <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                                     <MDBIcon fab icon="fa-lg">
-                                    <FontAwesomeIcon icon={faClipboard} className="fa-lg text-danger me-2" />
+                                        <FontAwesomeIcon icon={faClipboard} className="fa-lg text-danger me-2" />
                                         İzin İşlemleri:
                                     </MDBIcon>
                                     <MDBCardText>
-                                    <Link to={"/permission/create"} className="btn btn-danger">Yeni Bir İzin Oluştur</Link>
+                                        <Link to={"/permission/create"} className="btn btn-danger">Yeni Bir İzin Oluştur</Link>
                                     </MDBCardText>
                                 </MDBListGroupItem>
                             }
@@ -184,17 +184,24 @@ const UserPage = () => {
                             <MDBCardText className="text-muted">{user.phoneNumber || "Belirtilmedi"}</MDBCardText>
                         </MDBCol>
                         </MDBRow>
-                        <hr />
-                        <MDBRow>
-                        <MDBCol sm="3">
-                            <MDBCardText>Doğum Günü</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                            <MDBCardText className="text-muted">{user.birthday || "Belirtilmedi"}</MDBCardText>
-                        </MDBCol>
-                        </MDBRow>
-                        <hr />
-                        {statuses === "ADMIN" && 
+                        {((statuses === "ADMIN" && storeEmail != email) || statuses !== "ADMIN") &&
+                        <div>
+                            <hr />
+                            <MDBRow>
+                            <MDBCol sm="3">
+                                <MDBCardText>Doğum Günü</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="9">
+                                <MDBCardText className="text-muted">{user.birthday || "Belirtilmedi"}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                        </div>
+                        }
+                        
+                        
+                        {(statuses === "ADMIN" && storeEmail == email) && 
+                        <div>
+                            <hr />
                             <MDBRow>
                             <MDBCol sm="3">
                                 <MDBCardText>Rol</MDBCardText>
@@ -203,8 +210,11 @@ const UserPage = () => {
                                 <MDBCardText className="text-muted">{user.role || "Belirtilmedi"}</MDBCardText>
                             </MDBCol>
                             </MDBRow>
+                        </div>
                         }
-                        {statuses !== "ADMIN" && 
+                        {((statuses === "ADMIN" && storeEmail != email) || statuses !== "ADMIN") && 
+                        <div>
+                            <hr />
                             <MDBRow>
                             <MDBCol sm="3">
                                 <MDBCardText>Departman</MDBCardText>
@@ -213,16 +223,23 @@ const UserPage = () => {
                                 <MDBCardText className="text-muted">{user.department || "Belirtilmedi"}</MDBCardText>
                             </MDBCol>
                             </MDBRow>
+                        </div>
                         }
-                        <hr />
-                        <MDBRow>
-                        <MDBCol sm="3">
-                            <MDBCardText>Biyografi</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                            <MDBCardText className="text-muted">{user.biography || "Belirtilmedi"}</MDBCardText>
-                        </MDBCol>
-                        </MDBRow>
+                        
+                        {((statuses === "ADMIN" && storeEmail != email) || statuses !== "ADMIN") &&
+                        <div>
+                            <hr />
+                            <MDBRow>
+                            <MDBCol sm="3">
+                                <MDBCardText>Biyografi</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="9">
+                                <MDBCardText className="text-muted">{user.biography || "Belirtilmedi"}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                        </div>
+                        }
+                        
                     </MDBCardBody>
                     </MDBCard>
 
@@ -255,6 +272,7 @@ const UserPage = () => {
                     <PermissionFeed cardLocation="ProfilePage" userId={user.id} />
                 </MDBRow>
             }
+            
         </MDBContainer>
         </section>
     );

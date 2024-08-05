@@ -11,9 +11,11 @@ const PermissionFeed = ({ cardLocation, userId }) => {
     const [permission, setPermission] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [isLastPage, setIsLastPage] = useState(false);
-    const [isThereData, setIsThereData] = useState();
+    const [isThereData, setIsThereData] = useState(0);
 
     const pendingApiCall = useApiProgress('get','/api/v1/permissions/get/all?page=');
+
+    const [error, setError] = useState(null);
 
     const pageSize = 12;
     const sort = "startDate,DESC";
@@ -50,7 +52,7 @@ const PermissionFeed = ({ cardLocation, userId }) => {
             setPermission(combinedPermissons);
 
         } catch(error) {
-            console.log("HATAA")
+            setError("Error "+ error.response.data.status + ": " + error.response.data.detail);
         }
     }
 
@@ -62,7 +64,13 @@ const PermissionFeed = ({ cardLocation, userId }) => {
         fetchPermissions(pageNumber + 1, pageSize, sort);
     }
 
-    if(isThereData === 0) {
+    if(permission.length == 0) {
+        return (
+          <Spinner />
+        );
+    }
+
+    if(isThereData === 0 || error != null) {
         return (
           <div className="card h-100 border rounded-3 shadow d-flex align-items-center justify-content-center p-4">
               <FontAwesomeIcon icon={faExclamationCircle} className="rounded-circle bg-danger p-2 text-white me-2" />

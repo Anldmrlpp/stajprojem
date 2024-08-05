@@ -15,6 +15,8 @@ const ContactMessageFeed = () => {
 
     const pendingApiCall = useApiProgress('get','/api/v1/contacts/getpage?page=');
 
+    const [error, setError] = useState(null);
+
     const pageSize = 12;
     const sort = "createdDate,DESC";
 
@@ -41,7 +43,7 @@ const ContactMessageFeed = () => {
             setMessage(combinedMessages);
 
         } catch(error) {
-            console.log("HATAA")
+            setError("Error "+ error.response.data.status + ": " + error.response.data.detail);
         }
     }
 
@@ -53,7 +55,7 @@ const ContactMessageFeed = () => {
         fetchMessages(pageNumber + 1, pageSize, sort);
     }
 
-    if(isThereData === 0) {
+    if(isThereData === 0 || error != null) {
         return (
           <div className="card h-100 border rounded-3 shadow d-flex align-items-center justify-content-center p-4">
               <FontAwesomeIcon icon={faExclamationCircle} className="rounded-circle bg-danger p-2 text-white me-2" />

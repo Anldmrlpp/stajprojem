@@ -60,6 +60,7 @@ const UserUpdateProfile = () => {
             setUpdatedPhoneNumber(response.data.phoneNumber);
             setUpdatedDepartment(response.data.department);
             setUpdatedBirthday(response.data.birthday);
+            setUpdatedRole(response.data.role);
         } catch(error) {
         }
     }
