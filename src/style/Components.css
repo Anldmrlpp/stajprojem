@@ -172,20 +172,20 @@
     padding: 10px;
 }
 
-#permission-card .card-for-job .image-container {
+.card-for-permission .image-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#permission-card .card-for-job .image-container img {
+.card-for-permission .image-container img {
     height: 300px;
     max-height: 100%;
     max-width: 100%;
     object-fit: cover;
 }
 
-#permission-card .card-for-job .image-container-for-company img {
+.card-for-permission .image-container-for-company img {
     width: 12rem;
     height: 9rem;
     object-fit: cover;
@@ -210,20 +210,20 @@
     padding: 10px;
 }
 
-#message-card .card-for-job .image-container {
+#message-card .card-for-permission .image-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#message-card .card-for-job .image-container img {
+#message-card .card-for-permission .image-container img {
     height: 300px;
     max-height: 100%;
     max-width: 100%;
     object-fit: cover;
 }
 
-#message-card .card-for-job .image-container-for-company img {
+#message-card .card-for-permission .image-container-for-company img {
     width: 12rem;
     height: 9rem;
     object-fit: cover;

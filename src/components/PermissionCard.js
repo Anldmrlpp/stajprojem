@@ -44,7 +44,7 @@ const PermissionCard = ({ permission }) => {
     )
 
     return(
-            <div className={`mb-4 card-padding card-for-job col-md-4`}>
+            <div className={`mb-4 card-padding card-for-permission col-md-4`}>
                 {cardType}
             </div>
     );

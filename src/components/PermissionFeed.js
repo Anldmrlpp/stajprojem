@@ -64,13 +64,7 @@ const PermissionFeed = ({ cardLocation, userId }) => {
         fetchPermissions(pageNumber + 1, pageSize, sort);
     }
 
-    if(permission.length == 0) {
-        return (
-          <Spinner />
-        );
-    }
-
-    if(isThereData === 0 || error != null) {
+    if((isThereData === 0 && !pendingApiCall) || error != null) {
         return (
           <div className="card h-100 border rounded-3 shadow d-flex align-items-center justify-content-center p-4">
               <FontAwesomeIcon icon={faExclamationCircle} className="rounded-circle bg-danger p-2 text-white me-2" />
