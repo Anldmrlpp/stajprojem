@@ -58,6 +58,13 @@ export const updateAdmin = (id, form, adminKey) => {
 export const createContact = (body) => {
     return axios.post("/api/v1/contacts/create", body);
 }
+export const gettAllMessage = (pageNumber, pageSize, pageSort) => {
+    return axios.get(`/api/v1/contacts/getpage?page=${pageNumber}&size=${pageSize}&sort=${pageSort}`);
+}
+
+export const deleteMessage = (id) => {
+    return axios.delete(`/api/v1/contacts/delete/${id}`);
+}
 
 export const createPermission = (body) => {
     return axios.post("/api/v1/permissions", body);

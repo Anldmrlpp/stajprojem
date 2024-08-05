@@ -12,6 +12,7 @@ import UserUpdateProfile from './components/UserUpdateProfile';
 import Permission from './views/Permission/Permission';
 import PermissionCreate from './components/PermissionCreate';
 import PermissionUpdate from './components/PermissionUpdate';
+import ContactMessageFeed from './components/ContactMessageFeed';
 
 const App = () => {
 
@@ -38,6 +39,8 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/contact" element={<Contact />} />
+
+          <Route path="/contact/message" element={<ContactMessageFeed />} />
 
           <Route path="/profile/:email" element={<UserPage />} />
 
