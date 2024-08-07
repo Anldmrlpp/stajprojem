@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import PermissionCard from "./PermissionCard";
 
-const PermissionFeed = ({ cardLocation, userId }) => {
+const PermissionFeed = ({ cardLocation, userEmail }) => {
 
     const [permission, setPermission] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
@@ -29,7 +29,7 @@ const PermissionFeed = ({ cardLocation, userId }) => {
                 response = await getAllPermission(pageNumber, pageSize, pageSort);
             }
             if(cardLocation === "ProfilePage") {
-                response = await getAllPermissionForEmployee(userId, pageNumber, pageSize, pageSort);
+                response = await getAllPermissionForEmployee(userEmail, pageNumber, pageSize, pageSort);
             }
             const data = response.data.content;
             setIsLastPage(response.data.last);

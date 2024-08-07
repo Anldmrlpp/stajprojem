@@ -269,7 +269,7 @@ const UserPage = () => {
             </MDBRow>
             {((statuses === "ADMIN" && storeEmail!==email) || statuses !== "ADMIN") &&
                 <MDBRow className="mb-5">
-                    <PermissionFeed cardLocation="ProfilePage" userId={user.id} />
+                    <PermissionFeed cardLocation="ProfilePage" userEmail={user.email} />
                 </MDBRow>
             }
             

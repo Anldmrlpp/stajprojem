@@ -11,7 +11,7 @@ import Spinner from "./Spinner";
 
 const PermissionUpdate = () => {
 
-    const [employeeId, setEmployeeId] = useState();
+    const [email, setemail] = useState();
     const [description, setDescription] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -29,7 +29,7 @@ const PermissionUpdate = () => {
     const loadPermission = async () => {
         try {
             const response = await getPermission(id);
-            setEmployeeId(response.data.employeeId);
+            setemail(response.data.email);
             setDescription(response.data.description);
             setStartDate(response.data.startDate);
             setEndDate(response.data.endDate);
@@ -42,8 +42,8 @@ const PermissionUpdate = () => {
         const name = event.target.name;
         const value = event.target.value;
 
-        if(name === "employeeId") {
-            setEmployeeId(value);
+        if(name === "email") {
+            setemail(value);
         }
         if(name === "description") {
             setDescription(value);
@@ -62,7 +62,7 @@ const PermissionUpdate = () => {
         event.preventDefault();
 
         const body = {
-            employeeId,
+            email,
             description,
             startDate,
             endDate
@@ -94,7 +94,7 @@ const PermissionUpdate = () => {
                 </div>
                 <div className="card-body ps-5 pe-5">
 
-                    <Input name="employeeId" label="İzin Alan Çalışan Id'si" type="text" onChangeVeriables={onChange} placeholder="3fa85f64-5717-4562-b3fc-2c963f66afa6" value={employeeId} />
+                    <Input name="email" label="İzin Alan Çalışanın Email Adresi" type="text" onChangeVeriables={onChange} placeholder="ornek@gmail.com" value={email} />
 
                     <Input name="description" label="İzin Nedeni" type="text" onChangeVeriables={onChange} placeholder="Hasta, Tatil, Kişisel Nedenler..." value={description} />
                     

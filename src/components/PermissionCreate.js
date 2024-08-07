@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const PermissionCreate = () => {
 
-    const [employeeId, setEmployeeId] = useState();
+    const [email, setemail] = useState();
     const [description, setDescription] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -22,8 +22,8 @@ const PermissionCreate = () => {
         const name = event.target.name;
         const value = event.target.value;
 
-        if(name === "employeeId") {
-            setEmployeeId(value);
+        if(name === "email") {
+            setemail(value);
         }
         if(name === "description") {
             setDescription(value);
@@ -42,7 +42,7 @@ const PermissionCreate = () => {
         event.preventDefault();
 
         const body = {
-            employeeId,
+            email,
             description,
             startDate,
             endDate
@@ -52,7 +52,7 @@ const PermissionCreate = () => {
             await createPermission(body);
             toast.success("İzin Kaydı Başarıyla Oluşturuldu!");
 
-            setEmployeeId("");
+            setemail("");
             setDescription("");
             setStartDate("");
             setEndDate("");
@@ -73,16 +73,16 @@ const PermissionCreate = () => {
                     </img>
                 </div>
                 <div className="card-body ps-5 pe-5">
-                    <Input name="employeeId" label="İzin Alan Çalışan Id'si" type="text" onChangeVeriables={onChange} placeholder="3fa85f64-5717-4562-b3fc-2c963f66afa6" value={employeeId} />
+                    <Input name="email" label="İzin Alan Çalışan Email Adresi" type="text" onChangeVeriables={onChange} placeholder="ornek@gmail.com" value={email} />
 
                     <Input name="description" label="İzin Nedeni" type="text" onChangeVeriables={onChange} placeholder="Hasta, Tatil, Kişisel Nedenler..." value={description} />
-
+                    
                     <Input name="startDate" label="İzin Başlangı Günü" onChangeVeriables={onChange} type="date" value={startDate} />
 
                     <Input name="endDate" label="İzin Bitiş Günü" onChangeVeriables={onChange} type="date" value={endDate} />
 
                     <div>
-
+                                    
                         <button className="btn btn-primary d-inline-flex"
                                 onClick={onClickSave}
                                 disabled = {pendingApiCall}>
